@@ -265,36 +265,154 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.lucide) window.lucide.createIcons();
   }
 
-  // --- Render Skills Section (Tech Matrix Plates - Image 3) ---
+  // --- Render Skills Section (Tech Matrix Plates with Blueprint Hover & Tap Pop-ups) ---
   function renderSkills() {
     const container = document.getElementById('skills-container');
     if (!container) return;
 
+    const levelTranslations = {
+      fr: {
+        'Avancé': 'Avancé',
+        'Maîtrisé': 'Maîtrisé',
+        'Intermédiaire': 'Intermédiaire'
+      },
+      en: {
+        'Avancé': 'Advanced',
+        'Maîtrisé': 'Mastered',
+        'Intermédiaire': 'Intermediate'
+      }
+    };
+
     container.innerHTML = `
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        ${portfolioData.skills.map((cat, idx) => `
+        ${portfolioData.skills.map((cat, idx) => {
+          const catName = typeof cat.category === 'object' ? cat.category[currentLang] : cat.category;
+          const secNum = String(idx + 1).padStart(2, '0');
+          return `
           <div class="skill-plate">
             <div class="skill-plate-header">
               <div class="flex items-center gap-2 font-mono text-xs font-bold text-[var(--ink)] uppercase tracking-wider">
                 <i data-lucide="${cat.icon}" class="w-4 h-4 text-[var(--accent)]"></i>
-                <span>${cat.category[currentLang]}</span>
+                <span>${catName}</span>
               </div>
-              <span class="font-mono text-[10px] text-[var(--ink-muted)]">SEC. 0${idx + 1}</span>
+              <span class="font-mono text-[10px] text-[var(--ink-muted)]">SEC. ${secNum}</span>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-3">
-              ${cat.items.map(item => `
-                <div class="skill-tag-plate">
-                  <span class="text-[var(--accent)] text-[9px] shrink-0">▪</span>
-                  <span class="truncate">${item.name}</span>
+              ${cat.items.map(item => {
+                const lvl = (levelTranslations[currentLang] && levelTranslations[currentLang][item.level]) || item.level;
+                const safeName = item.name.replace(/"/g, '&quot;');
+                const safeCat = catName.replace(/"/g, '&quot;');
+                const isLong = item.name.length > 20;
+                return `
+                <div 
+                  class="skill-tag-plate group relative cursor-pointer"
+                  tabindex="0"
+                  role="button"
+                  data-skill-name="${safeName}"
+                  data-skill-level="${lvl}"
+                  data-skill-cat="${safeCat}"
+                  data-skill-sec="SEC. ${secNum}"
+                  title="${safeName} [${lvl}]"
+                  aria-label="${safeName} — ${lvl}"
+                >
+                  <span class="text-[var(--accent)] text-[9px] shrink-0 group-hover:scale-125 transition-transform">▪</span>
+                  <span class="skill-tag-text">${item.name}</span>
+                  ${isLong ? '<span class="hidden sm:inline-block font-mono text-[9px] text-[var(--accent)] opacity-60 group-hover:opacity-100 ml-auto shrink-0 font-bold" title="Survolez pour voir le détail">…</span>' : ''}
                 </div>
-              `).join('')}
+              `}).join('')}
             </div>
           </div>
-        `).join('')}
+        `}).join('')}
       </div>
     `;
 
     if (window.lucide) window.lucide.createIcons();
+    initSkillPopups();
+  }
+
+  // --- Skill Hover / Tap Pop-up Controller ---
+  function initSkillPopups() {
+    const popup = document.getElementById('skill-popup');
+    if (!popup) return;
+
+    const titleEl = document.getElementById('skill-popup-title');
+    const catEl = document.getElementById('skill-popup-cat');
+    const levelEl = document.getElementById('skill-popup-level');
+
+    let activeEl = null;
+
+    function positionPopup(el) {
+      const rect = el.getBoundingClientRect();
+      const popupWidth = popup.offsetWidth || 260;
+      const popupHeight = popup.offsetHeight || 90;
+
+      // Center horizontally relative to hovered element
+      let left = rect.left + (rect.width / 2) - (popupWidth / 2);
+      // Place above element by default
+      let top = rect.top - popupHeight - 8;
+
+      // Screen boundary checks
+      if (left < 10) left = 10;
+      if (left + popupWidth > window.innerWidth - 10) {
+        left = window.innerWidth - popupWidth - 10;
+      }
+
+      // If goes above screen, flip below
+      if (top < 10) {
+        top = rect.bottom + 8;
+      }
+
+      popup.style.left = `${Math.round(left)}px`;
+      popup.style.top = `${Math.round(top)}px`;
+    }
+
+    function showPopup(el) {
+      activeEl = el;
+      const name = el.getAttribute('data-skill-name');
+      const level = el.getAttribute('data-skill-level');
+      const cat = el.getAttribute('data-skill-cat');
+      const sec = el.getAttribute('data-skill-sec');
+
+      if (titleEl) titleEl.textContent = name;
+      if (catEl) catEl.textContent = `// ${sec} · ${cat}`;
+      if (levelEl) levelEl.textContent = level;
+
+      popup.classList.add('is-visible');
+      positionPopup(el);
+    }
+
+    function hidePopup() {
+      popup.classList.remove('is-visible');
+      activeEl = null;
+    }
+
+    document.querySelectorAll('.skill-tag-plate').forEach(el => {
+      // PC Hover / Focus
+      el.addEventListener('mouseenter', () => showPopup(el));
+      el.addEventListener('mouseleave', hidePopup);
+      el.addEventListener('focus', () => showPopup(el));
+      el.addEventListener('blur', hidePopup);
+
+      // Mobile Tap Toggle
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (activeEl === el && popup.classList.contains('is-visible')) {
+          hidePopup();
+        } else {
+          showPopup(el);
+        }
+      });
+    });
+
+    // Dismiss popup on window scroll or outside click
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.skill-tag-plate') && !e.target.closest('#skill-popup')) {
+        hidePopup();
+      }
+    });
+
+    window.addEventListener('scroll', hidePopup, { passive: true });
+    window.addEventListener('resize', hidePopup, { passive: true });
   }
 
   // --- Render Projects Section (Technical Blueprint Card Grid) ---

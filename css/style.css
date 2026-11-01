@@ -531,13 +531,58 @@ body::after {
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
-.skill-tag-plate:hover {
-  border-color: var(--ink);
-  color: var(--ink);
+.skill-tag-plate:hover,
+.skill-tag-plate:focus-visible {
+  border-color: var(--accent) !important;
+  color: var(--ink) !important;
+  background: var(--paper-elevated) !important;
+  transform: translateY(-1px);
+}
+
+.skill-tag-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+/* Floating Blueprint Skill Tooltip / Pop-up */
+#skill-popup {
+  position: fixed;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  will-change: transform, opacity;
+}
+
+#skill-popup.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Mobile responsive optimization: smooth wrapping on smartphones so words are never cut with ... */
+@media (max-width: 640px) {
+  .skill-tag-plate {
+    min-height: 42px;
+    padding: 9px 12px;
+    overflow: visible;
+  }
+  .skill-tag-text {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.35;
+    font-size: 11px;
+  }
 }
 
 /* ---- STATS: TECHNICAL DRAWING PARAMETER BOXES ---- */
