@@ -81,6 +81,7 @@ const portfolioData = {
       icon: "shield",
       items: [
         { name: "Docker & Docker Compose", level: "Avancé" },
+        { name: "Kubernetes (K8s)", level: "Avancé" },
         { name: "CI/CD (GitHub Actions)", level: "Avancé" },
         { name: "SOC & Intrusion Detection", level: "Avancé" },
         { name: "Log Sandbox & SIEM", level: "Avancé" },
@@ -89,14 +90,16 @@ const portfolioData = {
     },
     {
       category: {
-        fr: "ERP, Cloud & Données",
-        en: "ERP, Cloud & Databases"
+        fr: "Bases de Données, ERP & Cloud",
+        en: "Databases, ERP & Cloud"
       },
       icon: "database",
       items: [
-        { name: "Odoo 19 (Modules Métiers)", level: "Avancé" },
-        { name: "PostgreSQL & MySQL", level: "Avancé" },
+        { name: "PostgreSQL & MySQL (SQL)", level: "Avancé" },
         { name: "MongoDB & Redis (NoSQL)", level: "Avancé" },
+        { name: "Neo4j (BD Graphe)", level: "Avancé" },
+        { name: "Apache Cassandra (NoSQL)", level: "Avancé" },
+        { name: "Odoo 19 (Modules Métiers)", level: "Avancé" },
         { name: "Cloud AWS / Firebase", level: "Intermédiaire" },
         { name: "Modélisation UML & Merise", level: "Avancé" }
       ]
