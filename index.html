@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anass Chenguiti · Ingénieur Ingénierie Informatique & Réseaux | Dév Digital & SI</title>
+  <meta name="description" content="Portfolio d'Anass Chenguiti — Élève Ingénieur d'État à l'EMSI (Ingénierie Informatique & Réseaux, spécialité Développement Digital & Systèmes d'Information). Full-Stack & DevOps. Tanger, Maroc.">
+  <meta property="og:title" content="Anass Chenguiti · Ingénieur Full-Stack">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://anasschenguiti.github.io/">
+  <meta name="author" content="Anass Chenguiti">
+
+  <!-- Favicon / Website Icon (Haut de la fenêtre & Onglet du navigateur) -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2026.14">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=2026.14">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=2026.14">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2026.14">
+  <link rel="shortcut icon" href="favicon.ico?v=2026.14">
+
+  <!-- Google Fonts: Fraunces (Display Serif), JetBrains Mono (Technical Annotations), Plus Jakarta Sans (Clean Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Fraunces"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'Courier New', 'monospace'],
+          },
+          colors: {
+            signal: 'var(--accent)',
+            accent: 'var(--accent)',
+            surface: 'var(--surface)',
+            line: 'var(--line)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Engineering Blueprint Custom CSS -->
+  <link rel="stylesheet" href="css/style.css?v=2026.12">
+</head>
+<body class="relative min-h-screen text-[var(--ink)] bg-[var(--paper)] overflow-x-hidden selection:bg-[var(--accent)] selection:text-white">
+
+  <!-- Circle with Dot Inside Precision Cursor -->
+  <div id="cursor-dot" class="cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-ring" class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Interactive Architectural Drafting Canvas -->
+  <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-80"></canvas>
+
+  <!-- ====================== NAVIGATION ====================== -->
+  <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[64px] flex items-center justify-between">
+
+      <!-- Left: Photo with orange drafting box + Serif Name in Orange + Mono Title -->
+      <a href="#hero" class="flex items-center gap-3 shrink-0 group">
+        <div class="relative">
+          <!-- Orange CAD drafting box overlay -->
+          <div class="absolute -top-1.5 -left-1.5 w-6 h-6 border border-[var(--accent)]/70 pointer-events-none"></div>
+          <img src="https://github.com/anasschenguiti.png?size=80" alt="Anass Chenguiti" class="w-8 h-8 object-cover border border-[var(--ink)] block relative z-10">
+          <span class="absolute -bottom-1 -right-1 w-1.5 h-1.5 bg-[var(--accent)] z-20"></span>
+        </div>
+        <div class="leading-none">
+          <div class="font-serif text-lg text-[var(--accent)] font-normal tracking-tight">Anass Chenguiti</div>
+          <div class="font-mono text-[9px] text-[var(--ink-secondary)] tracking-wider uppercase mt-1">INGÉNIERIE INFO &amp; RÉSEAUX · EMSI</div>
+        </div>
+      </a>
+
+      <!-- Divider 1 -->
+      <div class="header-divider hidden lg:block"></div>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-6 xl:gap-8 font-mono text-[11px] tracking-wider uppercase">
+        <a href="#about"      class="nav-link-blueprint" data-i18n="navAbout">À PROPOS</a>
+        <a href="#skills"     class="nav-link-blueprint" data-i18n="navSkills">COMPÉTENCES</a>
+        <a href="#projects"   class="nav-link-blueprint" data-i18n="navProjects">PROJETS</a>
+        <a href="#education"  class="nav-link-blueprint" data-i18n="navEducation">ÉDUCATION</a>
+        <a href="#certifications" class="nav-link-blueprint" data-i18n="navCertifications">CERTIFICATIONS</a>
+        <a href="#experience" class="nav-link-blueprint" data-i18n="navExperience">EXPÉRIENCES</a>
+        <a href="#contact"    class="nav-link-blueprint" data-i18n="navContact">CONTACT</a>
+      </nav>
+
+      <!-- Divider 2 -->
+      <div class="header-divider hidden lg:block"></div>
+
+      <!-- Technical Controls -->
+      <div class="hidden sm:flex items-center gap-2.5 shrink-0">
+
+
+        <!-- Lang Toggle [ <globe> FR ] -->
+        <button id="lang-toggle-btn" class="header-ctrl-btn">
+          <i data-lucide="globe" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+          <span id="lang-indicator">EN</span>
+        </button>
+
+        <!-- Sharp Solid CTA: ME CONTACTER -->
+        <a href="#contact" class="header-cta-btn" data-i18n="btnContactMe">
+          CONTACT ME
+        </a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button id="mobile-menu-btn" class="lg:hidden p-2 border border-[var(--hairline-heavy)] text-[var(--ink)] bg-[var(--paper-elevated)]">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Technical Sub-header Ruler (Directly below navigation bar) -->
+    <div class="header-sub-ruler">
+      <div class="header-sub-ruler-inner">
+        <!-- Left: Orange '+' mark + SHEET NO + Coords -->
+        <div class="flex items-center gap-3">
+          <span class="text-[var(--accent)] font-bold text-xs">+</span>
+          <div>
+            <div>SHEET NO: 01 / 01 · REV: 2026</div>
+            <div class="text-[9px] text-[var(--ink-muted)]">[X: 8682 · Y: 0156]</div>
+          </div>
+        </div>
+
+        <span class="hidden md:inline-block text-[var(--hairline-heavy)] font-light">+</span>
+
+        <!-- Center: COORD TANGER -->
+        <div class="hidden sm:block">
+          <span>COORD: 35°46'N 05°48'W (TANGER)</span>
+        </div>
+
+        <span class="hidden md:inline-block text-[var(--hairline-heavy)] font-light">+</span>
+
+        <!-- Right: SCALE -->
+        <div class="hidden sm:block">
+          <span>SCALE: 1:1 REAL TIME</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Drawer (Touch-Optimized) -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-[var(--surface)] border-b border-[var(--line)] px-5 py-4 shadow-2xl">
+      <div class="flex flex-col font-mono text-xs mb-3 divide-y divide-[var(--line)]/60">
+        <a href="#about"      class="text-[var(--text)] py-3 px-1 flex justify-between items-center hover:text-[var(--accent)] transition-colors"><span data-i18n="navAbout">ABOUT</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-[var(--accent)]"></i></a>
+        <a href="#skills"     class="text-[var(--text)] py-3 px-1 flex justify-between items-center hover:text-[var(--accent)] transition-colors"><span data-i18n="navSkills">SKILLS</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-[var(--accent)]"></i></a>
+        <a href="#projects"   class="text-[var(--text)] py-3 px-1 flex justify-between items-center hover:text-[var(--accent)] transition-colors"><span data-i18n="navProjects">PROJECTS</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-[var(--accent)]"></i></a>
+        <a href="#education"  class="text-[var(--text)] py-3 px-1 flex justify-between items-center hover:text-[var(--accent)] transition-colors"><span data-i18n="navEducation">EDUCATION</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-[var(--accent)]"></i></a>
+        <a href="#certifications" class="text-[var(--text)] py-3 px-1 flex justify-between items-center hover:text-[var(--accent)] transition-colors"><span data-i18n="navCertifications">CERTIFICATIONS</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-[var(--accent)]"></i></a>
+        <a href="#experience" class="text-[var(--text)] py-3 px-1 flex justify-between items-center hover:text-[var(--accent)] transition-colors"><span data-i18n="navExperience">EXPERIENCES</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-[var(--accent)]"></i></a>
+        <a href="#contact"    class="text-[var(--text)] py-3 px-1 flex justify-between items-center hover:text-[var(--accent)] transition-colors"><span data-i18n="navContact">CONTACT</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-[var(--accent)]"></i></a>
+      </div>
+
+      <div class="pt-2 flex items-center gap-2 border-t border-[var(--line)]">
+        <button id="mobile-lang-btn" class="flex-1 py-2.5 border border-[var(--line)] bg-[var(--surface-sunken)] text-xs font-mono font-bold text-[var(--text)] flex items-center justify-center gap-2 hover:border-[var(--accent)] transition-colors">
+          <i data-lucide="globe" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+          <span id="mobile-lang-indicator">EN</span>
+        </button>
+        <a href="#contact" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="flex-1 py-2.5 bg-[var(--text)] text-[var(--bg)] hover:bg-[var(--accent)] hover:text-[#0A1220] text-xs font-mono font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors" data-i18n="btnContactMe">
+          CONTACT ME
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====================== MAIN BLUEPRINT SHEET ====================== -->
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 space-y-28">
+
+    <!-- ===== HERO SECTION (EXACT MATCH IMAGE 1) ===== -->
+    <section id="hero" class="min-h-[85vh] flex flex-col items-center justify-center text-center relative pt-8 border-b border-[var(--hairline-heavy)] pb-16">
+
+      <!-- Technical Drawing Border Marks (Crosshairs at 4 corners) -->
+      <div class="w-full relative py-6">
+        <div class="absolute -top-3 -left-3 font-mono text-xs text-[var(--accent)]">+</div>
+        <div class="absolute -top-3 -right-3 font-mono text-xs text-[var(--accent)]">+</div>
+        <div class="absolute -bottom-3 -left-3 font-mono text-xs text-[var(--accent)]">+</div>
+        <div class="absolute -bottom-3 -right-3 font-mono text-xs text-[var(--accent)]">+</div>
+
+        <!-- Availability Badge (Row 1 - Centered) -->
+        <div class="w-full flex justify-center mb-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 border border-[var(--accent)] bg-[var(--paper-elevated)] text-[11px] font-mono text-[var(--accent)] tracking-wider">
+            <span class="w-1.5 h-1.5 bg-[var(--accent)]"></span>
+            <span id="status-text" data-i18n="badgeAvailable">OPEN FOR GRADUATION INTERNSHIP &amp; FULL-TIME ROLES</span>
+          </div>
+        </div>
+
+        <!-- Technical Photo Frame (Row 2 - Centered directly under badge) -->
+        <div class="w-full flex justify-center mb-6">
+          <div class="relative p-1 border border-white/20 bg-white/5 inline-block">
+            <div class="absolute -top-1 -left-1 w-2.5 h-2.5 border-t border-l border-[var(--accent)]"></div>
+            <div class="absolute -bottom-1 -right-1 w-2.5 h-2.5 border-b border-r border-[var(--accent)]"></div>
+            <img
+              src="https://github.com/anasschenguiti.png?size=260"
+              alt="Anass Chenguiti"
+              class="w-32 h-32 sm:w-36 sm:h-36 object-cover block border border-[var(--hairline)]"
+              onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 160 160\'%3E%3Crect width=\'160\' height=\'160\' fill=\'%23111827\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23FF4D00\' font-size=\'48\' font-family=\'monospace\' font-weight=\'bold\'%3EAC%3C/text%3E%3C/svg%3E'"
+            >
+          </div>
+        </div>
+
+        <!-- Greeting + Headline (Anass Chenguiti with Chenguiti in orange italic) -->
+        <div class="space-y-3 max-w-4xl mx-auto">
+          <div class="font-mono text-xs font-bold text-[var(--accent)] uppercase tracking-widest flex items-center justify-center gap-2">
+            <span class="w-1.5 h-1.5 bg-[var(--accent)]"></span>
+            <span data-i18n="heroGreeting">HELLO, I AM</span>
+          </div>
+          <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight font-serif">
+            <span class="text-[var(--ink)]">Anass </span><span class="text-[var(--accent)] italic">Chenguiti</span>
+          </h1>
+        </div>
+
+        <!-- Typewriter (Monospace Technical Annotation) -->
+        <div class="h-10 flex items-center justify-center mt-3 mb-2 font-mono text-sm sm:text-base text-[var(--ink-secondary)]">
+          <span class="text-[var(--ink-muted)] mr-2">[TITLE]:</span>
+          <span id="hero-typewriter" class="text-[var(--ink)] font-semibold"></span>
+          <span class="typed-cursor text-[var(--accent)] ml-0.5">_</span>
+        </div>
+
+        <!-- Bio (Crisp Editorial Text) -->
+        <div id="profile-bio" class="text-xs sm:text-sm max-w-2xl mx-auto pt-2 pb-6 text-slate-300">
+          <p class="mb-3">
+            Élève-ingénieur à l'EMSI (filière Ingénierie Informatique & Réseaux, parcours Développement Digital et Systèmes d'Information), passionné par le développement de logiciels scalables et prêts pour la production sur l'ensemble de la stack : backend, frontend, mobile et orchestration IA.
+          </p>
+          <p>
+            J'accorde une importance primordiale à la clean architecture, la qualité du code, l'automatisation et l'apprentissage continu. J'aime mener un projet de sa conception (UML, architecture) jusqu'à son déploiement (Docker, Kubernetes, CI/CD).
+          </p>
+        </div>
+
+        <!-- Sharp Actions Row (Exact Match Image 1) -->
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <a href="#projects" class="px-6 py-3 bg-[var(--text)] text-[var(--bg)] hover:bg-[var(--accent-fill)] hover:text-[var(--accent-ink)] font-mono text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-colors">
+            <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+            <span data-i18n="heroCtaProjects">EXPLORE PROJECTS</span>
+          </a>
+          <a href="https://github.com/anasschenguiti" target="_blank" rel="noopener noreferrer"
+             class="px-6 py-3 border border-[var(--hairline-heavy)] bg-[var(--paper-elevated)] hover:border-[var(--accent)] text-[var(--ink)] font-mono text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-colors">
+            <span>GITHUB PROFILE</span>
+          </a>
+          <a href="#contact"
+             class="px-6 py-3 border border-[var(--hairline-heavy)] bg-[var(--paper-elevated)] hover:border-[var(--accent)] text-[var(--ink)] font-mono text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-colors">
+            <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+            <span data-i18n="btnContactMe">ME CONTACTER</span>
+          </a>
+        </div>
+
+        <!-- Parameter Statistics Grid (Exact Match Image 1) -->
+        <div id="stats-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-3.5 w-full max-w-4xl mx-auto mt-12">
+          <!-- Rendered dynamically by renderStats() -->
+        </div>
+
+        <!-- Scroll Hint -->
+        <div class="mt-12 flex items-center justify-center gap-2 font-mono text-[10px] text-[var(--ink-muted)] uppercase tracking-widest">
+          <span>[SCROLL FOR BLUEPRINT SPECIFICATIONS]</span>
+          <i data-lucide="arrow-down" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 01: ABOUT (EXACT MATCH IMAGE 2) ===== -->
+    <section id="about" class="scroll-mt-20 border-b border-[var(--hairline-heavy)] pb-20">
+      <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[var(--hairline)] pb-4">
+        <div>
+          <span class="drawing-label">■ 01 / ABOUT</span>
+          <h2 data-i18n="sectionAboutTitle" class="drawing-headline mt-1">À Propos de Moi</h2>
+        </div>
+        <p data-i18n="sectionAboutSubtitle" class="font-mono text-[11px] text-[var(--ink-muted)] uppercase tracking-wider text-right max-w-md leading-relaxed">
+          INGÉNIEUR LOGICIEL ANIMÉ PAR L'EXCELLENCE TECHNIQUE ET<br class="hidden sm:inline"> L'INNOVATION APPLIQUÉE
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Technical Profile Card Left (Exact Match Image 2) -->
+        <div class="lg:col-span-5">
+          <!-- Coordinates tag above card -->
+          <div class="flex items-center gap-1.5 font-mono text-[10px] text-[var(--ink-muted)] mb-1">
+            <span class="w-1.5 h-1.5 bg-[var(--accent)]"></span>
+            <span>[X: 8772 · Y: 8268]</span>
+          </div>
+
+          <div class="border border-[var(--hairline-heavy)] p-6 bg-[var(--paper-elevated)] space-y-4 relative corner-crosshair">
+            <!-- Framed Photo with CAD orange corner box -->
+            <div class="relative w-fit mx-auto">
+              <div class="absolute -top-2 -left-2 w-7 h-7 border border-[var(--accent)]/70 pointer-events-none"></div>
+              <img
+                src="https://github.com/anasschenguiti.png?size=220"
+                alt="Anass Chenguiti"
+                class="w-40 h-40 border border-[var(--ink)] object-cover block"
+              >
+            </div>
+
+            <div class="text-center pt-2">
+              <h3 class="font-serif text-xl font-normal text-[var(--ink)]">Anass Chenguiti</h3>
+              <div class="font-mono text-xs text-[var(--accent)] mt-1">Ingénierie Informatique &amp; Réseaux · EMSI</div>
+              <div class="text-[11px] text-[var(--ink-secondary)] mt-0.5">Spécialité Développement Digital &amp; Systèmes d'Information</div>
+              <div class="mt-2.5">
+                <span class="inline-block px-2.5 py-0.5 border border-[var(--hairline-heavy)] bg-[var(--paper)] font-mono text-[10px] font-bold text-[var(--ink)] uppercase">
+                  FULL-STACK &amp; DEVOPS
+                </span>
+              </div>
+              <div class="flex items-center justify-center gap-1.5 mt-2.5 font-mono text-xs text-[var(--ink-secondary)]">
+                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+                <span>Tanger, Maroc / Remote</span>
+              </div>
+              <div class="flex items-center justify-center gap-1.5 mt-2 font-mono text-xs text-[var(--accent)]">
+                <span class="w-1.5 h-1.5 bg-[var(--accent)]"></span>
+                <span>Disponible · Stage PFE / CDI</span>
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-[var(--hairline)] flex gap-2">
+              <a href="https://github.com/anasschenguiti" target="_blank" rel="noopener noreferrer"
+                 class="btn-outline flex-1 py-2 text-[11px] font-mono justify-center">
+                <span>GitHub</span>
+              </a>
+              <a href="https://www.linkedin.com/in/anass-chenguiti/" target="_blank" rel="noopener noreferrer"
+                 class="btn-outline flex-1 py-2 text-[11px] font-mono justify-center">
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Architectural Pillars Right (Exact Match Image 2) -->
+        <div class="lg:col-span-7 space-y-5">
+          <div data-i18n="aboutTextLead" class="text-xs sm:text-sm text-[var(--ink-secondary)] leading-relaxed text-justify">
+            <p class="mb-3">
+              Élève-ingénieur à l'EMSI (filière Ingénierie Informatique & Réseaux, parcours Développement Digital et Systèmes d'Information), passionné par le développement de logiciels scalables et prêts pour la production sur l'ensemble de la stack : backend, frontend, mobile et orchestration IA.
+            </p>
+            <p>
+              J'accorde une importance primordiale à la clean architecture, la qualité du code, l'automatisation et l'apprentissage continu. J'aime mener un projet de sa conception (UML, architecture) jusqu'à son déploiement (Docker, Kubernetes, CI/CD).
+            </p>
+          </div>
+
+          <div class="space-y-3 pt-2">
+            <!-- Pillar 1 -->
+            <div class="pillar-plate">
+              <div class="flex items-start gap-4">
+                <div class="w-8 h-8 border border-[var(--hairline-heavy)] bg-[var(--paper)] flex items-center justify-center shrink-0">
+                  <i data-lucide="shield-check" class="w-4 h-4 text-[var(--accent)]"></i>
+                </div>
+                <div>
+                  <h4 data-i18n="aboutPillar1Title" class="text-xs font-mono font-bold text-[var(--ink)] uppercase tracking-wider mb-1">
+                    ARCHITECTURE SOLIDE &amp; ÉVOLUTIVE
+                  </h4>
+                  <p data-i18n="aboutPillar1Desc" class="text-xs text-[var(--ink-secondary)] leading-relaxed">
+                    Systèmes microservices découplés, design patterns éprouvés, modélisation UML rigoureuse et principes SOLID.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pillar 2 -->
+            <div class="pillar-plate">
+              <div class="flex items-start gap-4">
+                <div class="w-8 h-8 border border-[var(--hairline-heavy)] bg-[var(--paper)] flex items-center justify-center shrink-0">
+                  <i data-lucide="cloud" class="w-4 h-4 text-[var(--accent)]"></i>
+                </div>
+                <div>
+                  <h4 data-i18n="aboutPillar2Title" class="text-xs font-mono font-bold text-[var(--ink)] uppercase tracking-wider mb-1">
+                    CLOUD-NATIVE &amp; CULTURE DEVOPS
+                  </h4>
+                  <p data-i18n="aboutPillar2Desc" class="text-xs text-[var(--ink-secondary)] leading-relaxed">
+                    Conteneurisation systématique (Docker), clusters distribués, pipelines CI/CD automatisés et observabilité.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pillar 3 -->
+            <div class="pillar-plate">
+              <div class="flex items-start gap-4">
+                <div class="w-8 h-8 border border-[var(--hairline-heavy)] bg-[var(--paper)] flex items-center justify-center shrink-0">
+                  <i data-lucide="brain-circuit" class="w-4 h-4 text-[var(--accent)]"></i>
+                </div>
+                <div>
+                  <h4 data-i18n="aboutPillar3Title" class="text-xs font-mono font-bold text-[var(--ink)] uppercase tracking-wider mb-1">
+                    INTELLIGENCE ARTIFICIELLE APPLIQUÉE
+                  </h4>
+                  <p data-i18n="aboutPillar3Desc" class="text-xs text-[var(--ink-secondary)] leading-relaxed">
+                    Agents IA autonomes, pipelines NLP, et intégration d'outils analytiques résolvant des cas d'usage métiers réels.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 02: SKILLS (TECH MATRIX - EXACT MATCH IMAGE 3) ===== -->
+    <section id="skills" class="scroll-mt-20 border-b border-[var(--hairline-heavy)] pb-20">
+      <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[var(--hairline)] pb-4">
+        <div>
+          <span class="drawing-label">■ 02 / TECH MATRIX</span>
+          <h2 data-i18n="sectionSkillsTitle" class="drawing-headline mt-1">Compétences & Stack</h2>
+        </div>
+        <p data-i18n="sectionSkillsSubtitle" class="font-mono text-[11px] text-[var(--ink-muted)] uppercase tracking-wider text-right max-w-md leading-relaxed">
+          UN ARSENAL TECHNIQUE DIVERSIFIÉ COUVRANT L'ENSEMBLE DU<br class="hidden sm:inline"> CYCLE DE VIE LOGICIEL
+        </p>
+      </div>
+
+      <!-- Structured Engineering Matrix Container (Rendered by renderSkills()) -->
+            <div id="skills-container">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="skill-plate">
+            <div class="skill-plate-header">
+              <div class="flex items-center gap-2 font-mono text-xs font-bold text-[var(--ink)] uppercase tracking-wider">
+                <i data-lucide="server" class="w-4 h-4 text-[var(--accent)]"></i>
+                <span>Backend &amp; Architectures</span>
+              </div>
+              <span class="font-mono text-[10px] text-[var(--ink-muted)]">SEC. 01</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-3">
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">Spring Boot / Cloud</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">Java / JEE</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">Python (FastAPI, Django)</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">Node.js / Express / NestJS</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">RESTful APIs &amp; GraphQL</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">Microservices &amp; Design Patterns</span></div>
+            </div>
+          </div>
+          <div class="skill-plate">
+            <div class="skill-plate-header">
+              <div class="flex items-center gap-2 font-mono text-xs font-bold text-[var(--ink)] uppercase tracking-wider">
+                <i data-lucide="layout" class="w-4 h-4 text-[var(--accent)]"></i>
+                <span>Frontend &amp; Mobile</span>
+              </div>
+              <span class="font-mono text-[10px] text-[var(--ink-muted)]">SEC. 02</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-3">
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">React.js / Next.js</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">TypeScript / Modern JS</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">Tailwind CSS &amp; UI</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">Flutter (Dart)</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">Android Natif</span></div>
+            </div>
+          </div>
+          <div class="skill-plate">
+            <div class="skill-plate-header">
+              <div class="flex items-center gap-2 font-mono text-xs font-bold text-[var(--ink)] uppercase tracking-wider">
+                <i data-lucide="shield" class="w-4 h-4 text-[var(--accent)]"></i>
+                <span>DevOps &amp; Cybersécurité</span>
+              </div>
+              <span class="font-mono text-[10px] text-[var(--ink-muted)]">SEC. 03</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-3">
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">Docker &amp; Compose</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">CI/CD (GitHub Actions)</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">SOC &amp; Intrusion Detection</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">Linux &amp; Bash Scripting</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">Kubernetes / K8s</span></div>
+            </div>
+          </div>
+          <div class="skill-plate">
+            <div class="skill-plate-header">
+              <div class="flex items-center gap-2 font-mono text-xs font-bold text-[var(--ink)] uppercase tracking-wider">
+                <i data-lucide="database" class="w-4 h-4 text-[var(--accent)]"></i>
+                <span>Bases de Données &amp; Systèmes</span>
+              </div>
+              <span class="font-mono text-[10px] text-[var(--ink-muted)]">SEC. 04</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-3">
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">PostgreSQL / MySQL</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">MongoDB / NoSQL</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">Odoo 19 ERP Core</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">Redis Cache</span></div>
+            </div>
+          </div>
+          <div class="skill-plate">
+            <div class="skill-plate-header">
+              <div class="flex items-center gap-2 font-mono text-xs font-bold text-[var(--ink)] uppercase tracking-wider">
+                <i data-lucide="cpu" class="w-4 h-4 text-[var(--accent)]"></i>
+                <span>IA &amp; Machine Learning</span>
+              </div>
+              <span class="font-mono text-[10px] text-[var(--ink-muted)]">SEC. 05</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-3">
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">Agents IA &amp; Multi-Agents</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">LangChain / LangGraph</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">PyTorch / Scikit-Learn</span></div>
+              <div class="skill-tag-plate"><span class="text-[var(--accent)] text-[9px] shrink-0">▪</span><span class="truncate">NLP &amp; LLM Orchestration</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 03: PROJECTS (PROJECT PLATES) ===== -->
+    <section id="projects" class="scroll-mt-20 border-b border-[var(--hairline-heavy)] pb-20">
+      <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[var(--hairline)] pb-4">
+        <div>
+          <span class="drawing-label">■ 03 / PROJECT PLATES</span>
+          <h2 data-i18n="sectionProjectsTitle" class="drawing-headline mt-1">Projets Réalisés</h2>
+        </div>
+        <p data-i18n="sectionProjectsSubtitle" class="font-mono text-[11px] text-[var(--ink-muted)] uppercase tracking-wider text-right max-w-md leading-relaxed">
+          Architectures de production, systèmes distribués et applications à fort impact
+        </p>
+      </div>
+
+      <!-- Blueprint Filters Bar -->
+      <div class="flex flex-wrap items-center gap-2 mb-8">
+        <button data-project-filter="all"        class="project-filter-btn active"><span data-i18n="filterAll">TOUS (14)</span></button>
+        <button data-project-filter="ai"         class="project-filter-btn"><span data-i18n="filterAi">IA & AGENTS</span></button>
+        <button data-project-filter="security"   class="project-filter-btn"><span data-i18n="filterSecurity">CYBERSÉCURITÉ & SOC</span></button>
+        <button data-project-filter="enterprise" class="project-filter-btn"><span data-i18n="filterEnterprise">ERP & SYSTÈMES</span></button>
+        <button data-project-filter="mobile"     class="project-filter-btn"><span data-i18n="filterMobile">MOBILE & APPS</span></button>
+      </div>
+
+      <!-- 3-Column Technical Blueprint Cards Grid -->
+      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+      <!-- GitHub Index Box -->
+      <div class="mt-8 border border-[var(--hairline-heavy)] bg-[var(--paper-elevated)] p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 border border-[var(--ink)] flex items-center justify-center font-mono font-bold text-sm bg-[var(--paper)]">
+            GIT
+          </div>
+          <div>
+            <div class="font-bold text-sm text-[var(--ink)]">Index complet des repositories publics sur GitHub</div>
+            <div class="font-mono text-xs text-[var(--ink-muted)] mt-0.5">15+ repositories publics · Commits & tests continus</div>
+          </div>
+        </div>
+        <a href="https://github.com/anasschenguiti" target="_blank" rel="noopener noreferrer" class="btn-blueprint text-xs">
+          <i data-lucide="github" class="w-4 h-4"></i>
+          <span>@anasschenguiti</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 04: EDUCATION (DRAFTING SCHEDULE) ===== -->
+    <section id="education" class="scroll-mt-20 border-b border-[var(--hairline-heavy)] pb-20">
+      <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[var(--hairline)] pb-4">
+        <div>
+          <span class="drawing-label">04 // EDUCATION</span>
+          <h2 data-i18n="sectionEducationTitle" class="drawing-headline mt-1">Éducation &amp; Diplômes</h2>
+        </div>
+        <p data-i18n="sectionEducationSubtitle" class="drawing-sub text-right">
+          PARCOURS ACADÉMIQUE, DIPLÔMES D'INGÉNIEUR &amp; SPÉCIALISATIONS
+        </p>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+                <div id="education-container">
+          <div class="blueprint-timeline">
+            <div class="blueprint-timeline-item">
+              <div class="timeline-period">[2024 – 2026 (dernière année)]</div>
+              <h4 class="timeline-title">Diplôme d’Ingénieur en Informatique &amp; Réseaux (DDSI)</h4>
+              <div class="timeline-institution-badge">
+                <i data-lucide="graduation-cap" class="w-4 h-4 text-[var(--accent)] shrink-0"></i>
+                <span class="timeline-institution-name">EMSI Tanger</span>
+                <span class="timeline-institution-loc">· Tanger, Maroc</span>
+              </div>
+              <p class="text-xs sm:text-sm text-[var(--ink-secondary)] leading-relaxed max-w-2xl mt-1">
+                Spécialisation : Développement Digital et Systèmes d’Information.<br>Domaines : développement full-stack, DevOps, data mining / Big Data, intelligence artificielle.
+              </p>
+              <div class="mt-2.5 flex flex-wrap items-center gap-1.5">
+                <span class="font-mono text-[10px] text-[var(--ink-muted)] uppercase mr-1">DOMAINES :</span>
+                <span class="px-2 py-0.5 bg-[var(--paper)] border border-[var(--accent)]/30 text-[10px] font-mono text-[var(--accent)]">Développement Full-Stack</span>
+                <span class="px-2 py-0.5 bg-[var(--paper)] border border-[var(--accent)]/30 text-[10px] font-mono text-[var(--accent)]">DevOps</span>
+                <span class="px-2 py-0.5 bg-[var(--paper)] border border-[var(--accent)]/30 text-[10px] font-mono text-[var(--accent)]">Data Mining / Big Data</span>
+                <span class="px-2 py-0.5 bg-[var(--paper)] border border-[var(--accent)]/30 text-[10px] font-mono text-[var(--accent)]">Intelligence Artificielle</span>
+              </div>
+            </div>
+            <div class="blueprint-timeline-item">
+              <div class="timeline-period">[2022 – 2024]</div>
+              <h4 class="timeline-title">DUT en Génie Informatique</h4>
+              <div class="timeline-institution-badge">
+                <i data-lucide="award" class="w-4 h-4 text-[var(--accent)] shrink-0"></i>
+                <span class="timeline-institution-name">École Supérieure de Technologie de Laâyoune</span>
+                <span class="timeline-institution-loc">· Laâyoune, Maroc</span>
+              </div>
+              <p class="text-xs sm:text-sm text-[var(--ink-secondary)] leading-relaxed max-w-2xl mt-1">
+                Diplôme Universitaire de Technologie en Génie Informatique : algorithmique avancée, bases de données relationnelles, programmation orientée objet, systèmes d'exploitation et réseaux informatiques.
+              </p>
+              <div class="mt-2.5 flex flex-wrap items-center gap-1.5">
+                <span class="font-mono text-[10px] text-[var(--ink-muted)] uppercase mr-1">DOMAINES :</span>
+                <span class="px-2 py-0.5 bg-[var(--paper)] border border-[var(--accent)]/30 text-[10px] font-mono text-[var(--accent)]">Génie Informatique</span>
+                <span class="px-2 py-0.5 bg-[var(--paper)] border border-[var(--accent)]/30 text-[10px] font-mono text-[var(--accent)]">Algorithmique &amp; BD</span>
+                <span class="px-2 py-0.5 bg-[var(--paper)] border border-[var(--accent)]/30 text-[10px] font-mono text-[var(--accent)]">POO &amp; Systèmes</span>
+                <span class="px-2 py-0.5 bg-[var(--paper)] border border-[var(--accent)]/30 text-[10px] font-mono text-[var(--accent)]">Réseaux</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 05: CERTIFICATIONS (CREDENTIALS & SPECIFICATIONS) ===== -->
+    <section id="certifications" class="scroll-mt-20 border-b border-[var(--hairline-heavy)] pb-20">
+      <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[var(--hairline)] pb-4">
+        <div>
+          <span class="drawing-label">05 // CERTIFICATIONS</span>
+          <h2 data-i18n="sectionCertificationsTitle" class="drawing-headline mt-1">Certifications &amp; Accréditations</h2>
+        </div>
+        <p data-i18n="sectionCertificationsSubtitle" class="drawing-sub text-right">
+          ACCRÉDITATIONS PROFESSIONNELLES, COURS CERTIFIÉS &amp; SPÉCIALISATIONS TECHNIQUES
+        </p>
+      </div>
+
+      <!-- Filter Buttons (Optional filter bar since > 6 certificates) -->
+      <div class="flex flex-wrap items-center gap-2 mb-8">
+        <button data-cert-filter="all" class="project-filter-btn active"><span data-i18n="filterCertAll">TOUS (9)</span></button>
+        <button data-cert-filter="ai" class="project-filter-btn"><span data-i18n="filterCertAi">IA & MACHINE LEARNING</span></button>
+        <button data-cert-filter="development" class="project-filter-btn"><span data-i18n="filterCertDev">DÉVELOPPEMENT & JS/C++</span></button>
+        <button data-cert-filter="data" class="project-filter-btn"><span data-i18n="filterCertData">BIG DATA & NOSQL</span></button>
+        <button data-cert-filter="management" class="project-filter-btn"><span data-i18n="filterCertMgmt">AGILE & PROJETS</span></button>
+      </div>
+
+      <!-- Responsive Grid: 3 columns desktop, 2 tablet, 1 mobile -->
+      <div id="certificates-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <article 
+          class="blueprint-card certificate-card group focus-visible:outline-2 focus-visible:outline-[var(--accent)] cursor-pointer" 
+          tabindex="0"
+          role="button"
+          aria-haspopup="dialog"
+          aria-label="Introduction to Machine Learning — Duke University"
+          data-cert-id="cert-intro-ml"
+          data-cert-index="0"
+          onclick="window.CertificateViewer && window.CertificateViewer.open('cert-intro-ml', this)"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.CertificateViewer && window.CertificateViewer.open('cert-intro-ml', this);}"
+        >
+          <div class="px-3 py-1.5 bg-[var(--surface-sunken)] border-b border-[var(--line)] flex items-center justify-between gap-2 min-h-[30px]">
+            <span class="font-mono text-[10px] font-bold text-[var(--accent)] tracking-wider uppercase">
+              DOC. 01 // SPEC
+            </span>
+            <span class="font-mono text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 bg-[var(--surface)] border border-[var(--line)] text-[var(--text-muted)]">
+              ID // 46H91F2RSFLI
+            </span>
+          </div>
+
+          <div class="relative h-44 sm:h-48 bg-[#070D18] overflow-hidden border-b border-[var(--line)] flex items-center justify-center">
+            <img 
+              src="images/certificates/cert-intro-ml.png" 
+              alt="Introduction to Machine Learning"
+              loading="lazy"
+              class="w-full h-full object-cover object-top filter brightness-[0.95] contrast-[1.02] group-hover:scale-105 group-hover:brightness-100 transition-all duration-300"
+            />
+            
+            <div class="absolute inset-0 bg-[#0A1220]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none p-3">
+              <span class="font-mono text-[11px] font-bold text-[var(--accent)] uppercase tracking-wider flex items-center gap-1.5 bg-[var(--surface)] border border-[var(--accent)] px-3 py-1.5 shadow-xl">
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+                <span>Consulter le certificat</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="p-3.5 flex-1 flex flex-col justify-between bg-[var(--surface)]">
+            <div>
+              <h3 class="font-serif text-sm sm:text-base font-semibold text-[var(--text)] line-clamp-2 leading-snug group-hover:text-[var(--accent)] transition-colors mb-1.5">
+                Introduction to Machine Learning
+              </h3>
+              <div class="flex items-center gap-1.5 text-xs text-[var(--text-muted)] font-mono mb-2">
+                <i data-lucide="building-2" class="w-3 h-3 text-[var(--accent)] shrink-0"></i>
+                <span class="truncate font-medium">Duke University</span>
+              </div>
+            </div>
+
+            <div class="pt-2.5 border-t border-[var(--line)] flex items-center justify-between font-mono text-[10px]">
+              <span class="text-[var(--text-muted)] flex items-center gap-1">
+                <i data-lucide="calendar" class="w-3 h-3 text-[var(--accent)]"></i>
+                <span>15 Janvier 2026</span>
+              </span>
+              <span class="text-[var(--accent)] font-bold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                <i data-lucide="file-check-2" class="w-3 h-3"></i>
+                <span>VÉRIFIÉ</span>
+              </span>
+            </div>
+          </div>
+        </article>
+
+
+        <article 
+          class="blueprint-card certificate-card group focus-visible:outline-2 focus-visible:outline-[var(--accent)] cursor-pointer" 
+          tabindex="0"
+          role="button"
+          aria-haspopup="dialog"
+          aria-label="Machine Learning with Python — IBM"
+          data-cert-id="cert-ml-python"
+          data-cert-index="1"
+          onclick="window.CertificateViewer && window.CertificateViewer.open('cert-ml-python', this)"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.CertificateViewer && window.CertificateViewer.open('cert-ml-python', this);}"
+        >
+          <div class="px-3 py-1.5 bg-[var(--surface-sunken)] border-b border-[var(--line)] flex items-center justify-between gap-2 min-h-[30px]">
+            <span class="font-mono text-[10px] font-bold text-[var(--accent)] tracking-wider uppercase">
+              DOC. 02 // SPEC
+            </span>
+            <span class="font-mono text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 bg-[var(--surface)] border border-[var(--line)] text-[var(--text-muted)]">
+              ID // TCH409YZ35MX
+            </span>
+          </div>
+
+          <div class="relative h-44 sm:h-48 bg-[#070D18] overflow-hidden border-b border-[var(--line)] flex items-center justify-center">
+            <img 
+              src="images/certificates/cert-ml-python.png" 
+              alt="Machine Learning with Python"
+              loading="lazy"
+              class="w-full h-full object-cover object-top filter brightness-[0.95] contrast-[1.02] group-hover:scale-105 group-hover:brightness-100 transition-all duration-300"
+            />
+            
+            <div class="absolute inset-0 bg-[#0A1220]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none p-3">
+              <span class="font-mono text-[11px] font-bold text-[var(--accent)] uppercase tracking-wider flex items-center gap-1.5 bg-[var(--surface)] border border-[var(--accent)] px-3 py-1.5 shadow-xl">
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+                <span>Consulter le certificat</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="p-3.5 flex-1 flex flex-col justify-between bg-[var(--surface)]">
+            <div>
+              <h3 class="font-serif text-sm sm:text-base font-semibold text-[var(--text)] line-clamp-2 leading-snug group-hover:text-[var(--accent)] transition-colors mb-1.5">
+                Machine Learning with Python
+              </h3>
+              <div class="flex items-center gap-1.5 text-xs text-[var(--text-muted)] font-mono mb-2">
+                <i data-lucide="building-2" class="w-3 h-3 text-[var(--accent)] shrink-0"></i>
+                <span class="truncate font-medium">IBM</span>
+              </div>
+            </div>
+
+            <div class="pt-2.5 border-t border-[var(--line)] flex items-center justify-between font-mono text-[10px]">
+              <span class="text-[var(--text-muted)] flex items-center gap-1">
+                <i data-lucide="calendar" class="w-3 h-3 text-[var(--accent)]"></i>
+                <span>15 Janvier 2026</span>
+              </span>
+              <span class="text-[var(--accent)] font-bold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                <i data-lucide="file-check-2" class="w-3 h-3"></i>
+                <span>VÉRIFIÉ</span>
+              </span>
+            </div>
+          </div>
+        </article>
+
+
+        <article 
+          class="blueprint-card certificate-card group focus-visible:outline-2 focus-visible:outline-[var(--accent)] cursor-pointer" 
+          tabindex="0"
+          role="button"
+          aria-haspopup="dialog"
+          aria-label="Introduction to NoSQL Databases — IBM"
+          data-cert-id="cert-nosql"
+          data-cert-index="2"
+          onclick="window.CertificateViewer && window.CertificateViewer.open('cert-nosql', this)"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.CertificateViewer && window.CertificateViewer.open('cert-nosql', this);}"
+        >
+          <div class="px-3 py-1.5 bg-[var(--surface-sunken)] border-b border-[var(--line)] flex items-center justify-between gap-2 min-h-[30px]">
+            <span class="font-mono text-[10px] font-bold text-[var(--accent)] tracking-wider uppercase">
+              DOC. 03 // SPEC
+            </span>
+            <span class="font-mono text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 bg-[var(--surface)] border border-[var(--line)] text-[var(--text-muted)]">
+              ID // UM35AZ1JXW8F
+            </span>
+          </div>
+
+          <div class="relative h-44 sm:h-48 bg-[#070D18] overflow-hidden border-b border-[var(--line)] flex items-center justify-center">
+            <img 
+              src="images/certificates/cert-nosql.png" 
+              alt="Introduction to NoSQL Databases"
+              loading="lazy"
+              class="w-full h-full object-cover object-top filter brightness-[0.95] contrast-[1.02] group-hover:scale-105 group-hover:brightness-100 transition-all duration-300"
+            />
+            
+            <div class="absolute inset-0 bg-[#0A1220]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none p-3">
+              <span class="font-mono text-[11px] font-bold text-[var(--accent)] uppercase tracking-wider flex items-center gap-1.5 bg-[var(--surface)] border border-[var(--accent)] px-3 py-1.5 shadow-xl">
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+                <span>Consulter le certificat</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="p-3.5 flex-1 flex flex-col justify-between bg-[var(--surface)]">
+            <div>
+              <h3 class="font-serif text-sm sm:text-base font-semibold text-[var(--text)] line-clamp-2 leading-snug group-hover:text-[var(--accent)] transition-colors mb-1.5">
+                Introduction to NoSQL Databases
+              </h3>
+              <div class="flex items-center gap-1.5 text-xs text-[var(--text-muted)] font-mono mb-2">
+                <i data-lucide="building-2" class="w-3 h-3 text-[var(--accent)] shrink-0"></i>
+                <span class="truncate font-medium">IBM</span>
+              </div>
+            </div>
+
+            <div class="pt-2.5 border-t border-[var(--line)] flex items-center justify-between font-mono text-[10px]">
+              <span class="text-[var(--text-muted)] flex items-center gap-1">
+                <i data-lucide="calendar" class="w-3 h-3 text-[var(--accent)]"></i>
+                <span>15 Janvier 2026</span>
+              </span>
+              <span class="text-[var(--accent)] font-bold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                <i data-lucide="file-check-2" class="w-3 h-3"></i>
+                <span>VÉRIFIÉ</span>
+              </span>
+            </div>
+          </div>
+        </article>
+
+
+        <article 
+          class="blueprint-card certificate-card group focus-visible:outline-2 focus-visible:outline-[var(--accent)] cursor-pointer" 
+          tabindex="0"
+          role="button"
+          aria-haspopup="dialog"
+          aria-label="Introduction to Big Data — UC San Diego"
+          data-cert-id="cert-big-data"
+          data-cert-index="3"
+          onclick="window.CertificateViewer && window.CertificateViewer.open('cert-big-data', this)"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.CertificateViewer && window.CertificateViewer.open('cert-big-data', this);}"
+        >
+          <div class="px-3 py-1.5 bg-[var(--surface-sunken)] border-b border-[var(--line)] flex items-center justify-between gap-2 min-h-[30px]">
+            <span class="font-mono text-[10px] font-bold text-[var(--accent)] tracking-wider uppercase">
+              DOC. 04 // SPEC
+            </span>
+            <span class="font-mono text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 bg-[var(--surface)] border border-[var(--line)] text-[var(--text-muted)]">
+              ID // RSFMYY110802
+            </span>
+          </div>
+
+          <div class="relative h-44 sm:h-48 bg-[#070D18] overflow-hidden border-b border-[var(--line)] flex items-center justify-center">
+            <img 
+              src="images/certificates/cert-big-data.png" 
+              alt="Introduction to Big Data"
+              loading="lazy"
+              class="w-full h-full object-cover object-top filter brightness-[0.95] contrast-[1.02] group-hover:scale-105 group-hover:brightness-100 transition-all duration-300"
+            />
+            
+            <div class="absolute inset-0 bg-[#0A1220]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none p-3">
+              <span class="font-mono text-[11px] font-bold text-[var(--accent)] uppercase tracking-wider flex items-center gap-1.5 bg-[var(--surface)] border border-[var(--accent)] px-3 py-1.5 shadow-xl">
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+                <span>Consulter le certificat</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="p-3.5 flex-1 flex flex-col justify-between bg-[var(--surface)]">
+            <div>
+              <h3 class="font-serif text-sm sm:text-base font-semibold text-[var(--text)] line-clamp-2 leading-snug group-hover:text-[var(--accent)] transition-colors mb-1.5">
+                Introduction to Big Data
+              </h3>
+              <div class="flex items-center gap-1.5 text-xs text-[var(--text-muted)] font-mono mb-2">
+                <i data-lucide="building-2" class="w-3 h-3 text-[var(--accent)] shrink-0"></i>
+                <span class="truncate font-medium">UC San Diego</span>
+              </div>
+            </div>
+
+            <div class="pt-2.5 border-t border-[var(--line)] flex items-center justify-between font-mono text-[10px]">
+              <span class="text-[var(--text-muted)] flex items-center gap-1">
+                <i data-lucide="calendar" class="w-3 h-3 text-[var(--accent)]"></i>
+                <span>8 Mai 2026</span>
+              </span>
+              <span class="text-[var(--accent)] font-bold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                <i data-lucide="file-check-2" class="w-3 h-3"></i>
+                <span>VÉRIFIÉ</span>
+              </span>
+            </div>
+          </div>
+        </article>
+
+
+        <article 
+          class="blueprint-card certificate-card group focus-visible:outline-2 focus-visible:outline-[var(--accent)] cursor-pointer" 
+          tabindex="0"
+          role="button"
+          aria-haspopup="dialog"
+          aria-label="Interactivity with JavaScript — University of Michigan"
+          data-cert-id="cert-interactivity-js"
+          data-cert-index="4"
+          onclick="window.CertificateViewer && window.CertificateViewer.open('cert-interactivity-js', this)"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.CertificateViewer && window.CertificateViewer.open('cert-interactivity-js', this);}"
+        >
+          <div class="px-3 py-1.5 bg-[var(--surface-sunken)] border-b border-[var(--line)] flex items-center justify-between gap-2 min-h-[30px]">
+            <span class="font-mono text-[10px] font-bold text-[var(--accent)] tracking-wider uppercase">
+              DOC. 05 // SPEC
+            </span>
+            <span class="font-mono text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 bg-[var(--surface)] border border-[var(--line)] text-[var(--text-muted)]">
+              ID // RD0YNB5VXHPL
+            </span>
+          </div>
+
+          <div class="relative h-44 sm:h-48 bg-[#070D18] overflow-hidden border-b border-[var(--line)] flex items-center justify-center">
+            <img 
+              src="images/certificates/cert-interactivity-js.png" 
+              alt="Interactivity with JavaScript"
+              loading="lazy"
+              class="w-full h-full object-cover object-top filter brightness-[0.95] contrast-[1.02] group-hover:scale-105 group-hover:brightness-100 transition-all duration-300"
+            />
+            
+            <div class="absolute inset-0 bg-[#0A1220]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none p-3">
+              <span class="font-mono text-[11px] font-bold text-[var(--accent)] uppercase tracking-wider flex items-center gap-1.5 bg-[var(--surface)] border border-[var(--accent)] px-3 py-1.5 shadow-xl">
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+                <span>Consulter le certificat</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="p-3.5 flex-1 flex flex-col justify-between bg-[var(--surface)]">
+            <div>
+              <h3 class="font-serif text-sm sm:text-base font-semibold text-[var(--text)] line-clamp-2 leading-snug group-hover:text-[var(--accent)] transition-colors mb-1.5">
+                Interactivity with JavaScript
+              </h3>
+              <div class="flex items-center gap-1.5 text-xs text-[var(--text-muted)] font-mono mb-2">
+                <i data-lucide="building-2" class="w-3 h-3 text-[var(--accent)] shrink-0"></i>
+                <span class="truncate font-medium">University of Michigan</span>
+              </div>
+            </div>
+
+            <div class="pt-2.5 border-t border-[var(--line)] flex items-center justify-between font-mono text-[10px]">
+              <span class="text-[var(--text-muted)] flex items-center gap-1">
+                <i data-lucide="calendar" class="w-3 h-3 text-[var(--accent)]"></i>
+                <span>21 Novembre 2024</span>
+              </span>
+              <span class="text-[var(--accent)] font-bold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                <i data-lucide="file-check-2" class="w-3 h-3"></i>
+                <span>VÉRIFIÉ</span>
+              </span>
+            </div>
+          </div>
+        </article>
+
+
+        <article 
+          class="blueprint-card certificate-card group focus-visible:outline-2 focus-visible:outline-[var(--accent)] cursor-pointer" 
+          tabindex="0"
+          role="button"
+          aria-haspopup="dialog"
+          aria-label="Using Python to Access Web Data — University of Michigan"
+          data-cert-id="cert-python-web"
+          data-cert-index="5"
+          onclick="window.CertificateViewer && window.CertificateViewer.open('cert-python-web', this)"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.CertificateViewer && window.CertificateViewer.open('cert-python-web', this);}"
+        >
+          <div class="px-3 py-1.5 bg-[var(--surface-sunken)] border-b border-[var(--line)] flex items-center justify-between gap-2 min-h-[30px]">
+            <span class="font-mono text-[10px] font-bold text-[var(--accent)] tracking-wider uppercase">
+              DOC. 06 // SPEC
+            </span>
+            <span class="font-mono text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 bg-[var(--surface)] border border-[var(--line)] text-[var(--text-muted)]">
+              ID // JX7UQBCTCO0X
+            </span>
+          </div>
+
+          <div class="relative h-44 sm:h-48 bg-[#070D18] overflow-hidden border-b border-[var(--line)] flex items-center justify-center">
+            <img 
+              src="images/certificates/cert-python-web.png" 
+              alt="Using Python to Access Web Data"
+              loading="lazy"
+              class="w-full h-full object-cover object-top filter brightness-[0.95] contrast-[1.02] group-hover:scale-105 group-hover:brightness-100 transition-all duration-300"
+            />
+            
+            <div class="absolute inset-0 bg-[#0A1220]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none p-3">
+              <span class="font-mono text-[11px] font-bold text-[var(--accent)] uppercase tracking-wider flex items-center gap-1.5 bg-[var(--surface)] border border-[var(--accent)] px-3 py-1.5 shadow-xl">
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+                <span>Consulter le certificat</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="p-3.5 flex-1 flex flex-col justify-between bg-[var(--surface)]">
+            <div>
+              <h3 class="font-serif text-sm sm:text-base font-semibold text-[var(--text)] line-clamp-2 leading-snug group-hover:text-[var(--accent)] transition-colors mb-1.5">
+                Using Python to Access Web Data
+              </h3>
+              <div class="flex items-center gap-1.5 text-xs text-[var(--text-muted)] font-mono mb-2">
+                <i data-lucide="building-2" class="w-3 h-3 text-[var(--accent)] shrink-0"></i>
+                <span class="truncate font-medium">University of Michigan</span>
+              </div>
+            </div>
+
+            <div class="pt-2.5 border-t border-[var(--line)] flex items-center justify-between font-mono text-[10px]">
+              <span class="text-[var(--text-muted)] flex items-center gap-1">
+                <i data-lucide="calendar" class="w-3 h-3 text-[var(--accent)]"></i>
+                <span>29 Avril 2025</span>
+              </span>
+              <span class="text-[var(--accent)] font-bold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                <i data-lucide="file-check-2" class="w-3 h-3"></i>
+                <span>VÉRIFIÉ</span>
+              </span>
+            </div>
+          </div>
+        </article>
+
+
+        <article 
+          class="blueprint-card certificate-card group focus-visible:outline-2 focus-visible:outline-[var(--accent)] cursor-pointer" 
+          tabindex="0"
+          role="button"
+          aria-haspopup="dialog"
+          aria-label="Introduction à la programmation orientée objet (C++) — EPFL"
+          data-cert-id="cert-intro-oop-cpp"
+          data-cert-index="6"
+          onclick="window.CertificateViewer && window.CertificateViewer.open('cert-intro-oop-cpp', this)"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.CertificateViewer && window.CertificateViewer.open('cert-intro-oop-cpp', this);}"
+        >
+          <div class="px-3 py-1.5 bg-[var(--surface-sunken)] border-b border-[var(--line)] flex items-center justify-between gap-2 min-h-[30px]">
+            <span class="font-mono text-[10px] font-bold text-[var(--accent)] tracking-wider uppercase">
+              DOC. 07 // SPEC
+            </span>
+            <span class="font-mono text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 bg-[var(--surface)] border border-[var(--line)] text-[var(--text-muted)]">
+              ID // 751B0ADD99
+            </span>
+          </div>
+
+          <div class="relative h-44 sm:h-48 bg-[#070D18] overflow-hidden border-b border-[var(--line)] flex items-center justify-center">
+            <img 
+              src="images/certificates/cert-intro-oop-cpp.png" 
+              alt="Introduction à la programmation orientée objet (C++)"
+              loading="lazy"
+              class="w-full h-full object-cover object-top filter brightness-[0.95] contrast-[1.02] group-hover:scale-105 group-hover:brightness-100 transition-all duration-300"
+            />
+            
+            <div class="absolute inset-0 bg-[#0A1220]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none p-3">
+              <span class="font-mono text-[11px] font-bold text-[var(--accent)] uppercase tracking-wider flex items-center gap-1.5 bg-[var(--surface)] border border-[var(--accent)] px-3 py-1.5 shadow-xl">
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+                <span>Consulter le certificat</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="p-3.5 flex-1 flex flex-col justify-between bg-[var(--surface)]">
+            <div>
+              <h3 class="font-serif text-sm sm:text-base font-semibold text-[var(--text)] line-clamp-2 leading-snug group-hover:text-[var(--accent)] transition-colors mb-1.5">
+                Introduction à la programmation orientée objet (C++)
+              </h3>
+              <div class="flex items-center gap-1.5 text-xs text-[var(--text-muted)] font-mono mb-2">
+                <i data-lucide="building-2" class="w-3 h-3 text-[var(--accent)] shrink-0"></i>
+                <span class="truncate font-medium">EPFL</span>
+              </div>
+            </div>
+
+            <div class="pt-2.5 border-t border-[var(--line)] flex items-center justify-between font-mono text-[10px]">
+              <span class="text-[var(--text-muted)] flex items-center gap-1">
+                <i data-lucide="calendar" class="w-3 h-3 text-[var(--accent)]"></i>
+                <span>6 Janvier 2025</span>
+              </span>
+              <span class="text-[var(--accent)] font-bold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                <i data-lucide="file-check-2" class="w-3 h-3"></i>
+                <span>VÉRIFIÉ</span>
+              </span>
+            </div>
+          </div>
+        </article>
+
+
+        <article 
+          class="blueprint-card certificate-card group focus-visible:outline-2 focus-visible:outline-[var(--accent)] cursor-pointer" 
+          tabindex="0"
+          role="button"
+          aria-haspopup="dialog"
+          aria-label="Agile Project Management — Google"
+          data-cert-id="cert-agile-pm"
+          data-cert-index="7"
+          onclick="window.CertificateViewer && window.CertificateViewer.open('cert-agile-pm', this)"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.CertificateViewer && window.CertificateViewer.open('cert-agile-pm', this);}"
+        >
+          <div class="px-3 py-1.5 bg-[var(--surface-sunken)] border-b border-[var(--line)] flex items-center justify-between gap-2 min-h-[30px]">
+            <span class="font-mono text-[10px] font-bold text-[var(--accent)] tracking-wider uppercase">
+              DOC. 08 // SPEC
+            </span>
+            <span class="font-mono text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 bg-[var(--surface)] border border-[var(--line)] text-[var(--text-muted)]">
+              ID // Z0BWNIGVHUT5
+            </span>
+          </div>
+
+          <div class="relative h-44 sm:h-48 bg-[#070D18] overflow-hidden border-b border-[var(--line)] flex items-center justify-center">
+            <img 
+              src="images/certificates/cert-agile-pm.png" 
+              alt="Agile Project Management"
+              loading="lazy"
+              class="w-full h-full object-cover object-top filter brightness-[0.95] contrast-[1.02] group-hover:scale-105 group-hover:brightness-100 transition-all duration-300"
+            />
+            
+            <div class="absolute inset-0 bg-[#0A1220]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none p-3">
+              <span class="font-mono text-[11px] font-bold text-[var(--accent)] uppercase tracking-wider flex items-center gap-1.5 bg-[var(--surface)] border border-[var(--accent)] px-3 py-1.5 shadow-xl">
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+                <span>Consulter le certificat</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="p-3.5 flex-1 flex flex-col justify-between bg-[var(--surface)]">
+            <div>
+              <h3 class="font-serif text-sm sm:text-base font-semibold text-[var(--text)] line-clamp-2 leading-snug group-hover:text-[var(--accent)] transition-colors mb-1.5">
+                Agile Project Management
+              </h3>
+              <div class="flex items-center gap-1.5 text-xs text-[var(--text-muted)] font-mono mb-2">
+                <i data-lucide="building-2" class="w-3 h-3 text-[var(--accent)] shrink-0"></i>
+                <span class="truncate font-medium">Google</span>
+              </div>
+            </div>
+
+            <div class="pt-2.5 border-t border-[var(--line)] flex items-center justify-between font-mono text-[10px]">
+              <span class="text-[var(--text-muted)] flex items-center gap-1">
+                <i data-lucide="calendar" class="w-3 h-3 text-[var(--accent)]"></i>
+                <span>8 Mai 2026</span>
+              </span>
+              <span class="text-[var(--accent)] font-bold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                <i data-lucide="file-check-2" class="w-3 h-3"></i>
+                <span>VÉRIFIÉ</span>
+              </span>
+            </div>
+          </div>
+        </article>
+
+
+        <article 
+          class="blueprint-card certificate-card group focus-visible:outline-2 focus-visible:outline-[var(--accent)] cursor-pointer" 
+          tabindex="0"
+          role="button"
+          aria-haspopup="dialog"
+          aria-label="Software Design and Project Management — HKUST"
+          data-cert-id="cert-software-design"
+          data-cert-index="8"
+          onclick="window.CertificateViewer && window.CertificateViewer.open('cert-software-design', this)"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.CertificateViewer && window.CertificateViewer.open('cert-software-design', this);}"
+        >
+          <div class="px-3 py-1.5 bg-[var(--surface-sunken)] border-b border-[var(--line)] flex items-center justify-between gap-2 min-h-[30px]">
+            <span class="font-mono text-[10px] font-bold text-[var(--accent)] tracking-wider uppercase">
+              DOC. 09 // SPEC
+            </span>
+            <span class="font-mono text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 bg-[var(--surface)] border border-[var(--line)] text-[var(--text-muted)]">
+              ID // QUW7LDUHFW0D
+            </span>
+          </div>
+
+          <div class="relative h-44 sm:h-48 bg-[#070D18] overflow-hidden border-b border-[var(--line)] flex items-center justify-center">
+            <img 
+              src="images/certificates/cert-software-design.png" 
+              alt="Software Design and Project Management"
+              loading="lazy"
+              class="w-full h-full object-cover object-top filter brightness-[0.95] contrast-[1.02] group-hover:scale-105 group-hover:brightness-100 transition-all duration-300"
+            />
+            
+            <div class="absolute inset-0 bg-[#0A1220]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none p-3">
+              <span class="font-mono text-[11px] font-bold text-[var(--accent)] uppercase tracking-wider flex items-center gap-1.5 bg-[var(--surface)] border border-[var(--accent)] px-3 py-1.5 shadow-xl">
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+                <span>Consulter le certificat</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="p-3.5 flex-1 flex flex-col justify-between bg-[var(--surface)]">
+            <div>
+              <h3 class="font-serif text-sm sm:text-base font-semibold text-[var(--text)] line-clamp-2 leading-snug group-hover:text-[var(--accent)] transition-colors mb-1.5">
+                Software Design and Project Management
+              </h3>
+              <div class="flex items-center gap-1.5 text-xs text-[var(--text-muted)] font-mono mb-2">
+                <i data-lucide="building-2" class="w-3 h-3 text-[var(--accent)] shrink-0"></i>
+                <span class="truncate font-medium">HKUST</span>
+              </div>
+            </div>
+
+            <div class="pt-2.5 border-t border-[var(--line)] flex items-center justify-between font-mono text-[10px]">
+              <span class="text-[var(--text-muted)] flex items-center gap-1">
+                <i data-lucide="calendar" class="w-3 h-3 text-[var(--accent)]"></i>
+                <span>19 Avril 2025</span>
+              </span>
+              <span class="text-[var(--accent)] font-bold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                <i data-lucide="file-check-2" class="w-3 h-3"></i>
+                <span>VÉRIFIÉ</span>
+              </span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 06: PROFESSIONAL EXPERIENCE (MATCH TIMELINE FORMAT) ===== -->
+    <section id="experience" class="scroll-mt-20 border-b border-[var(--hairline-heavy)] pb-20">
+      <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[var(--hairline)] pb-4">
+        <div>
+          <span class="drawing-label">06 // EXPERIENCE</span>
+          <h2 data-i18n="sectionExperienceTitle" class="drawing-headline mt-1">Expériences &amp; Stages</h2>
+        </div>
+        <p data-i18n="sectionExperienceSubtitle" class="drawing-sub text-right">
+          STAGES TECHNIQUES, DÉVELOPPEMENT LOGICIEL &amp; AGENTS IA DE PRODUCTION
+        </p>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+                <div id="experiences-container">
+          <div class="blueprint-timeline">
+            <div class="blueprint-timeline-item">
+              <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                <span class="timeline-period">[Juillet 2026 – Août 2026]</span>
+              </div>
+              <h4 class="timeline-title">Software Development Intern</h4>
+              <div class="timeline-institution-badge">
+                <i data-lucide="building-2" class="w-4 h-4 text-[var(--accent)] shrink-0"></i>
+                <span class="timeline-institution-name">IKSATECH Digital Services</span>
+                <span class="timeline-institution-loc">· Tanger, Maroc</span>
+              </div>
+              <p class="text-xs sm:text-sm text-[var(--ink-secondary)] leading-relaxed max-w-2xl mt-1">Conception et développement d’un agent commercial (BDR) basé sur l’IA : qualification des prospects, prospection personnalisée multicanal (email, LinkedIn) et gestion des objections.</p>
+              <div class="mt-2.5 inline-block font-mono text-[10px] text-[var(--accent)] border border-[var(--accent)]/30 px-2.5 py-0.5">
+                STACK: Python (FastAPI) · LangChain / LangGraph · NLP
+              </div>
+            </div>
+            <div class="blueprint-timeline-item">
+              <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                <span class="timeline-period">[Juin 2025 – Juillet 2025]</span>
+              </div>
+              <h4 class="timeline-title">Software Development Intern</h4>
+              <div class="timeline-institution-badge">
+                <i data-lucide="building-2" class="w-4 h-4 text-[var(--accent)] shrink-0"></i>
+                <span class="timeline-institution-name">Techium Sarl</span>
+                <span class="timeline-institution-loc">· Tétouan, Maroc</span>
+              </div>
+              <p class="text-xs sm:text-sm text-[var(--ink-secondary)] leading-relaxed max-w-2xl mt-1">Développement d’un système automatisé de gestion de certificats : création, génération et administration. Support au dépannage logiciel et amélioration des outils internes.</p>
+              <div class="mt-2.5 inline-block font-mono text-[10px] text-[var(--accent)] border border-[var(--accent)]/30 px-2.5 py-0.5">
+                STACK: Automatisation · Gestion Certificats · Tooling
+              </div>
+            </div>
+            <div class="blueprint-timeline-item">
+              <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                <span class="timeline-period">[Mai 2024 – Juillet 2024]</span>
+              </div>
+              <h4 class="timeline-title">Specialized Technician Intern</h4>
+              <div class="timeline-institution-badge">
+                <i data-lucide="building-2" class="w-4 h-4 text-[var(--accent)] shrink-0"></i>
+                <span class="timeline-institution-name">Lwilaye de Laayoune Sakia El-Hamra</span>
+                <span class="timeline-institution-loc">· Laâyoune, Maroc</span>
+              </div>
+              <p class="text-xs sm:text-sm text-[var(--ink-secondary)] leading-relaxed max-w-2xl mt-1">Développement d’une application de gestion des stagiaires (Python, Java, SQL) et optimisation des bases de données. Création de petites applications web (HTML, CSS, PHP) et résolution de problèmes logiciels, en équipe et dans les délais.</p>
+              <div class="mt-2.5 inline-block font-mono text-[10px] text-[var(--accent)] border border-[var(--accent)]/30 px-2.5 py-0.5">
+                STACK: Python · Java · SQL · PHP · Web
+              </div>
+            </div>
+            <div class="blueprint-timeline-item">
+              <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                <span class="timeline-period">[Mai 2023 – Juin 2023]</span>
+              </div>
+              <h4 class="timeline-title">Software Development Technician Intern</h4>
+              <div class="timeline-institution-badge">
+                <i data-lucide="building-2" class="w-4 h-4 text-[var(--accent)] shrink-0"></i>
+                <span class="timeline-institution-name">Lwilaye de Laayoune Sakia El-Hamra</span>
+                <span class="timeline-institution-loc">· Laâyoune, Maroc</span>
+              </div>
+              <p class="text-xs sm:text-sm text-[var(--ink-secondary)] leading-relaxed max-w-2xl mt-1">Résolution de problèmes matériels et logiciels, développement de petits projets (Python, Java, HTML) et maintenance des systèmes existants.</p>
+              <div class="mt-2.5 inline-block font-mono text-[10px] text-[var(--accent)] border border-[var(--accent)]/30 px-2.5 py-0.5">
+                STACK: Python · Java · HTML · Maintenance Systèmes
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 06: CONTACT ===== -->
+    <section id="contact" class="scroll-mt-20 pb-16">
+      <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[var(--hairline)] pb-4">
+        <div>
+          <span class="drawing-label">07 // LET'S CONNECT</span>
+          <h2 data-i18n="sectionContactTitle" class="drawing-headline mt-1">Démarrons une Collaboration</h2>
+        </div>
+        <p data-i18n="sectionContactSubtitle" class="drawing-sub text-right">
+          Un projet, une opportunité ou un stage PFE ? Écrivez-moi !
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-5xl mx-auto">
+        <!-- Direct Coordinates Left -->
+        <div class="lg:col-span-5 space-y-3">
+          <!-- Direct Email Box -->
+          <div class="border border-[var(--hairline-heavy)] bg-[var(--paper-elevated)] p-5 relative corner-crosshair">
+            <div class="flex items-center justify-between mb-2">
+              <span class="drawing-label text-[10px]" data-i18n="contactDirectEmail">DIRECT EMAIL</span>
+              <button onclick="copyEmail()" class="text-xs font-mono text-[var(--ink-muted)] hover:text-[var(--accent)] flex items-center gap-1 transition-colors">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i> <span data-i18n="contactCopyBtn">Copy</span>
+              </button>
+            </div>
+            <a href="mailto:anasschenguiti@gmail.com" class="text-sm sm:text-base font-bold font-mono text-[var(--ink)] hover:text-[var(--accent)] transition-colors break-all">
+              anasschenguiti@gmail.com
+            </a>
+            <div id="copy-feedback" class="text-xs font-mono text-[var(--accent)] font-semibold mt-2 opacity-0 transition-opacity" data-i18n="contactCopySuccess">
+              Email copied to clipboard!
+            </div>
+          </div>
+
+          <!-- GitHub Link Box -->
+          <a href="https://github.com/anasschenguiti" target="_blank" rel="noopener noreferrer"
+             class="border border-[var(--hairline-heavy)] bg-[var(--paper-elevated)] p-4 flex items-center justify-between hover:border-[var(--accent)] transition-colors block">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 border border-[var(--hairline-heavy)] overflow-hidden shrink-0">
+                <img src="https://github.com/anasschenguiti.png?size=80" alt="Anass Chenguiti GitHub" class="w-full h-full object-cover">
+              </div>
+              <div>
+                <div class="text-[10px] font-mono text-[var(--ink-muted)] uppercase">GitHub Repos</div>
+                <div class="text-xs font-bold font-mono text-[var(--ink)]">@anasschenguiti</div>
+              </div>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-4 h-4 text-[var(--accent)]"></i>
+          </a>
+
+          <!-- LinkedIn Link Box -->
+          <a href="https://www.linkedin.com/in/anass-chenguiti/" target="_blank" rel="noopener noreferrer"
+             class="border border-[var(--hairline-heavy)] bg-[var(--paper-elevated)] p-4 flex items-center justify-between hover:border-[var(--accent)] transition-colors block">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 border border-[var(--hairline-heavy)] overflow-hidden shrink-0">
+                <img src="https://github.com/anasschenguiti.png?size=80" alt="Anass Chenguiti LinkedIn" class="w-full h-full object-cover">
+              </div>
+              <div>
+                <div class="text-[10px] font-mono text-[var(--ink-muted)] uppercase" data-i18n="contactDirectPhone">LinkedIn Network</div>
+                <div class="text-xs font-bold font-mono text-[var(--ink)]">anass-chenguiti</div>
+              </div>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-4 h-4 text-[var(--accent)]"></i>
+          </a>
+
+          <!-- Location Specification -->
+          <div class="border border-[var(--hairline-heavy)] bg-[var(--paper-elevated)] p-4 flex items-center gap-3">
+            <div class="w-10 h-10 border border-[var(--hairline-heavy)] flex items-center justify-center shrink-0">
+              <i data-lucide="map-pin" class="w-5 h-5 text-[var(--accent)]"></i>
+            </div>
+            <div>
+              <div class="text-[10px] font-mono text-[var(--ink-muted)] uppercase" data-i18n="contactLocationLabel">Location</div>
+              <div class="text-xs font-bold text-[var(--ink)]" data-i18n="contactLocationValue">Tangier, Morocco · Remote OK</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form Right -->
+        <div class="lg:col-span-7">
+          <form id="contact-form" class="border border-[var(--hairline-heavy)] bg-[var(--paper-elevated)] p-6 space-y-4 corner-crosshair">
+            <div class="text-[10px] font-mono text-[var(--accent)] uppercase tracking-widest border-b border-[var(--hairline)] pb-2 mb-2" data-i18n="formSpecHeader">
+              // SPECIFICATION TRANSMISSION FORM
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="form-label" data-i18n="formNameLabel">Name / Organization</label>
+                <input id="contact-name" type="text" required placeholder="Your Name / Organization" data-i18n-placeholder="formNamePlaceholder" class="form-field">
+              </div>
+              <div>
+                <label class="form-label" data-i18n="formEmailLabel">Email</label>
+                <input id="contact-email" type="email" required placeholder="your.email@company.com" data-i18n-placeholder="formEmailPlaceholder" class="form-field">
+              </div>
+            </div>
+            <div>
+              <label class="form-label" data-i18n="formSubjectLabel">Subject</label>
+              <input id="contact-subject" type="text" required placeholder="Subject (e.g., Internship / Career Opportunity)" data-i18n-placeholder="formSubjectPlaceholder" class="form-field">
+            </div>
+            <div>
+              <label class="form-label" data-i18n="formMessageLabel">Message</label>
+              <textarea id="contact-message" rows="4" required placeholder="Hi Anass, I'd like to discuss an opportunity with you..." data-i18n-placeholder="formMessagePlaceholder" class="form-field resize-none"></textarea>
+            </div>
+            <button type="submit" class="btn-blueprint w-full py-3.5 text-xs">
+              <i data-lucide="send" class="w-3.5 h-3.5"></i>
+              <span data-i18n="formSubmitBtn">Send Message</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== PROJECT MODAL (BLUEPRINT SPEC SHEET) ===== -->
+  <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop">
+    <div class="relative w-full max-w-2xl modal-blueprint-card overflow-hidden">
+      <button onclick="window.closeProjectModal()" class="absolute top-4 right-4 p-2 border border-[var(--hairline-heavy)] bg-[var(--paper)] text-[var(--ink)] hover:text-[var(--accent)] transition-colors z-10 font-mono text-xs">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+      <div id="modal-content-area" class="p-6 sm:p-8 max-h-[85vh] overflow-y-auto"></div>
+    </div>
+  </div>
+
+  <!-- ===== CERTIFICATE VIEWER MODAL (BLUEPRINT SPEC LIGHTBOX) ===== -->
+  <div id="certificate-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-2 sm:p-4 md:p-6 modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title">
+    <div class="relative w-full max-w-5xl h-[92vh] max-h-[900px] flex flex-col bg-[var(--surface)] border-2 border-[var(--line)] shadow-2xl overflow-hidden">
+      
+      <!-- Modal Header Toolbar -->
+      <div class="p-3 sm:p-4 border-b border-[var(--line)] bg-[var(--surface)] flex items-center justify-between gap-3 shrink-0">
+        <div class="flex items-center gap-3 overflow-hidden">
+          <span class="px-2 py-0.5 border border-[var(--accent)] text-[var(--accent)] font-mono text-[10px] uppercase font-bold shrink-0">
+            SPEC DOC
+          </span>
+          <div class="overflow-hidden">
+            <h3 id="cert-modal-title" class="font-serif text-sm sm:text-base font-bold text-[var(--text)] truncate">
+              Certificate Title
+            </h3>
+            <div class="flex items-center gap-3 font-mono text-[10px] text-[var(--text-muted)] mt-0.5">
+              <span id="cert-modal-counter">[01 / 09]</span>
+              <span class="hidden sm:inline">·</span>
+              <span class="hidden sm:flex items-center gap-1">
+                <i data-lucide="building-2" class="w-3 h-3 text-[var(--accent)]"></i>
+                <span id="cert-modal-issuer">Issuer</span>
+              </span>
+              <span class="hidden md:inline">·</span>
+              <span class="hidden md:flex items-center gap-1">
+                <i data-lucide="calendar" class="w-3 h-3 text-[var(--accent)]"></i>
+                <span id="cert-modal-date">Date</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Toolbar Action Buttons -->
+        <div class="flex items-center gap-1.5 shrink-0">
+          <!-- Verify Link (Coursera) -->
+          <a id="cert-modal-verify" href="#" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-1 px-2.5 py-1.5 border border-[var(--line)] bg-[var(--surface)] text-[var(--text)] hover:text-[var(--accent)] hover:border-[var(--accent)] text-xs font-mono transition-colors" title="Vérifier l'authenticité">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+            <span class="hidden md:inline">Vérifier</span>
+          </a>
+
+          <!-- Open in new tab -->
+          <a id="cert-modal-newtab" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-2.5 py-1.5 border border-[var(--line)] bg-[var(--surface)] text-[var(--text)] hover:text-[var(--accent)] hover:border-[var(--accent)] text-xs font-mono transition-colors" title="Ouvrir dans un nouvel onglet">
+            <i data-lucide="external-link" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+          </a>
+
+          <!-- Prev/Next -->
+          <button onclick="window.CertificateViewer.prev()" class="p-1.5 border border-[var(--line)] bg-[var(--surface)] text-[var(--text)] hover:text-[var(--accent)] hover:border-[var(--accent)] text-xs font-mono transition-colors" title="Précédent" aria-label="Certificat précédent">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+          </button>
+          <button onclick="window.CertificateViewer.next()" class="p-1.5 border border-[var(--line)] bg-[var(--surface)] text-[var(--text)] hover:text-[var(--accent)] hover:border-[var(--accent)] text-xs font-mono transition-colors" title="Suivant" aria-label="Certificat suivant">
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </button>
+
+          <!-- Close button -->
+          <button id="cert-modal-close" onclick="window.CertificateViewer.close()" class="p-1.5 border border-[var(--line)] bg-[var(--surface)] text-[var(--text)] hover:text-[var(--accent)] hover:border-[var(--accent)] text-xs font-mono transition-colors ml-1" title="Fermer" aria-label="Fermer le visualiseur">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Viewer Body (PDF iframe or image) -->
+      <div id="cert-viewer-area" class="relative flex-1 bg-[#0A1220] overflow-hidden min-h-0">
+        <!-- Rendered dynamically -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== FOOTER: MOCK TITLE BLOCK (CARTOUCHE DE DESSIN TECHNIQUE) ===== -->
+  <footer class="relative z-10 mt-20 border-t-2 border-[var(--ink)] bg-[var(--paper)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+      <!-- Engineering Drawing Title Block (Cartouche) -->
+      <div class="title-block">
+        <div class="col-span-12 sm:col-span-4 title-block-cell">
+          <span class="title-block-k">DRAWING / PROJECT TITLE</span>
+          <span class="title-block-v">ENGINEERING PORTFOLIO SPECIFICATIONS</span>
+        </div>
+        <div class="col-span-6 sm:col-span-3 title-block-cell">
+          <span class="title-block-k">ENGINEER</span>
+          <span class="title-block-v">ANASS CHENGUITI</span>
+        </div>
+        <div class="col-span-6 sm:col-span-3 title-block-cell">
+          <span class="title-block-k">ORGANIZATION</span>
+          <span class="title-block-v">EMSI TANGER</span>
+        </div>
+        <div class="col-span-6 sm:col-span-2 title-block-cell">
+          <span class="title-block-k">SHEET</span>
+          <span class="title-block-v title-block-accent">01 / 01</span>
+        </div>
+
+        <div class="col-span-12 sm:col-span-4 title-block-cell">
+          <span class="title-block-k">SPECIALTY / TRACK</span>
+          <span class="title-block-v">DIGITAL DEV & INFO SYSTEMS (IIR)</span>
+        </div>
+        <div class="col-span-6 sm:col-span-3 title-block-cell">
+          <span class="title-block-k">LOCATION COORD</span>
+          <span class="title-block-v">35°46'N 05°48'W · TANGER</span>
+        </div>
+        <div class="col-span-6 sm:col-span-3 title-block-cell">
+          <span class="title-block-k">STATUS</span>
+          <span class="title-block-v title-block-accent">AVAILABLE (PFE / CDI)</span>
+        </div>
+        <div class="col-span-6 sm:col-span-2 title-block-cell">
+          <span class="title-block-k">SCALE · REV</span>
+          <span class="title-block-v">1:1 · REV 3.1</span>
+        </div>
+      </div>
+
+      <!-- Footer Sub-bar -->
+      <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-[var(--ink-muted)]">
+        <div>
+          © 2026 <span class="text-[var(--ink)] font-bold">Anass Chenguiti</span> — <span data-i18n="footerRights">Conçu avec passion & précision.</span>
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="https://github.com/anasschenguiti" target="_blank" class="hover:text-[var(--accent)] transition-colors">GitHub</a>
+          <a href="https://www.linkedin.com/in/anass-chenguiti/" target="_blank" class="hover:text-[var(--accent)] transition-colors">LinkedIn</a>
+          <a href="#hero" class="text-[var(--accent)] flex items-center gap-1 font-bold">
+            <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i> TOP
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="js/data.js?v=2026.12"></script>
+  <script src="js/certificates.js?v=2026.12"></script>
+  <script src="js/canvas.js?v=2026.12"></script>
+  <script src="js/main.js?v=2026.12"></script>
+  <script>
+    // Scroll-based nav active link tracking
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks  = document.querySelectorAll('.nav-link, .nav-link-blueprint');
+    const observer  = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(l => {
+            l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+    sections.forEach(s => observer.observe(s));
+
+    lucide.createIcons();
+  </script>
+</body>
+</html>
